@@ -1,3 +1,47 @@
+@color-red :rgb(248, 82, 82);
+
+#app {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+  cursor: pointer;
+  &:focus {
+    outline: 0; //remove blue outline
+  }
+  &.btn-white {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+  }
+  &.btn-white:hover {
+    background-color: rgb(240, 238, 238);
+  }
+  &.btn-text {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+.app-header {
+  overflow: hidden;
+}
+
+.btn-modal-filter {
+  float: left;
+}
+.selector-order {
+  float: right;
+
+  button.selected {
+    color: @color-red;
+  }
+}
+
 .modal-mask {
   position: fixed;
   z-index: 1050;
@@ -27,6 +71,12 @@
   border-radius: 0.25rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
+}
+
+.modal-body {
+  .item-filter + .item-filter {
+    margin-left: 5px;
+  }
 }
 
 /*

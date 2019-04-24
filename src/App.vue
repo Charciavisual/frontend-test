@@ -1,22 +1,31 @@
 
 <template>
-  <div>
-    <button @click="pageParam.showModal=true">필터</button>
-    <modal-filter v-if="pageParam.showModal" :category="cateList" @close="pageParam.showModal=false" @updateFilter="value=>{updateFilter(value)}"></modal-filter>
+  <div id="app">
+    <div class="app-header">
+      <button class="btn-white btn-modal-filter" @click="showModal=true">필터</button>
+      <selector-order @updateOrder="value=>{pageParams.order = value}"></selector-order>
+      <modal-filter v-if="showModal" :category="cateList" @close="showModal=false" @updateFilter="value=>{updateFilter(value)}"></modal-filter>
+    </div>
+     <div class="app-body">
+
+     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import modalFilter from "./components/modal-filter";
+import selectorOrder from "./components/selector-order";
 export default {
-  components: { modalFilter },
+  components: { modalFilter, selectorOrder },
   data() {
     return {
       cateList:  [],
       contents: [],
-      pageParam: {
-        showModal: false,
+      showModal: false,
+      pageParams: {
+        page: 1,
+        order: "asc",
         filter: []
       }
     };
@@ -25,18 +34,17 @@ export default {
     this.initApplication();
   },
   methods: {
-    initApplication() {
+     initApplication() {
       this.getCategories()
         .then(categories => {
-          let reqCate = [];
           categories.forEach(category => {
-            reqCate.push(category.no);
+            let _filter = []
+            _filter.push(category.no);
+            this.pageParams.filter= _filter;
           });
-
-          return reqCate;
         })
-        .then(category => {
-          this.getContents(1, "asc", category);
+        .then(() => {
+          this.getContents(this.pageParams.page, this.pageParams.order, this.pageParams.filter);
         });
     },
     getCategories() {
@@ -67,7 +75,7 @@ export default {
           params: params
         })
           .then(response => {
-            this.contents = response.data.list;
+            this.contents = this.contents.concat(response.data.list);
             console.log("Success load content list");
           })
           .catch(() => {
@@ -76,11 +84,11 @@ export default {
       });
     },
     updateFilter(list){
-      this.pageParam.filter = list;
+      this.pageParams.filter = list;
       this.closeModal();
     },
     closeModal(){
-      this.pageParam.showModal = false;
+      this.showModal = false;
     }
   }
 };

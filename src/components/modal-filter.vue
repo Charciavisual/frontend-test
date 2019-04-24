@@ -7,7 +7,7 @@
           <button type="button" class="close" @click="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
-          <span v-for="item in category" :key="'filter_'+item.no">
+          <span class="item-filter" v-for="item in category" :key="'filter_'+item.no">
             <input :id="'filter_'+item.no" type="checkbox" :value="item.no" v-model="selected">
             <label :for="'filter_'+item.no">{{item.name}}</label>
           </span>
