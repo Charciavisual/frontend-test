@@ -3,7 +3,7 @@
     <div class="modal-mask" @click.self="closeModal()">
       <div class="modal-container">
         <div class="modal-header">
-          <h4 slot="header">필터</h4>
+          <h4>필터</h4>
           <button type="button" class="close" @click="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
@@ -13,7 +13,7 @@
           </span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="float-right" @click="updateFilter()">저장</button>
+          <button type="button" class="btn-positive" @click="updateFilter()">저장</button>
         </div>
       </div>
     </div>
@@ -22,12 +22,7 @@
 
 <script>
 export default {
-  props: ["category"],
-  data() {
-    return {
-      selected: []
-    };
-  },
+  props: ["category", "selected"],
   methods: {
     closeModal() {
       this.$emit("close");

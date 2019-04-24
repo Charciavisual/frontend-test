@@ -2,12 +2,16 @@
 <template>
   <div id="app">
     <div class="app-header">
-      <button class="btn-white btn-modal-filter" @click="showModal=true">필터</button>
-      <selector-order @updateOrder="value=>{pageParams.order = value}"></selector-order>
-      <modal-filter v-if="showModal" :category="cateList" @close="showModal=false" @updateFilter="value=>{updateFilter(value)}"></modal-filter>
+      <button class="btn-white btn-modal-filter" @click="toggleModal()">필터</button>
+      <selector-order @updateOrder="value=>{updateOrder(value)}"></selector-order>
+      <modal-filter v-if="showModal" :category="cateList" :selected="pageParams.filter" @close="toggleModal()" @updateFilter="value=>{updateFilter(value)}"></modal-filter>
     </div>
      <div class="app-body">
-
+        <ul class="contents">
+          <li v-for="(item,index) in contents" :key="'contents_'+item.no">
+            <content-main :category="transCateNoToName(item.category_no)" :content="item"></content-main>
+          </li>
+        </ul>
      </div>
   </div>
 </template>
@@ -16,8 +20,9 @@
 import axios from "axios";
 import modalFilter from "./components/modal-filter";
 import selectorOrder from "./components/selector-order";
+import contentMain from "./components/content-main"
 export default {
-  components: { modalFilter, selectorOrder },
+  components: { modalFilter, selectorOrder, contentMain },
   data() {
     return {
       cateList:  [],
@@ -37,23 +42,26 @@ export default {
      initApplication() {
       this.getCategories()
         .then(categories => {
+          let _filter = []
           categories.forEach(category => {
-            let _filter = []
             _filter.push(category.no);
-            this.pageParams.filter= _filter;
           });
+          this.pageParams.filter= _filter;
         })
         .then(() => {
-          this.getContents(this.pageParams.page, this.pageParams.order, this.pageParams.filter);
+          this.getContents().then(_contents => {
+            this.contents = _contents;
+          });
         });
     },
+
+    //request methods
     getCategories() {
       return new Promise((resolve, reject) => {
         axios
           .get("http://comento.cafe24.com/category.php")
           .then(response => {
             this.cateList = response.data.list;
-            console.log("Success load category list");
             resolve(this.cateList);
           })
           .catch(() => {
@@ -61,34 +69,57 @@ export default {
           });
       });
     },
-    getContents(_page, _ord, _category) {
+    getContents() {
       const url = "http://comento.cafe24.com/request.php";
-      const params = {
-        page: _page,
-        ord: _ord,
-        category: _category
-      };
+  
       return new Promise((resolve, reject) => {
         axios({
           url: url,
           method: "get",
-          params: params
+          params: {
+            page: this.pageParams.page, 
+            ord: this.pageParams.order, 
+            category: this.pageParams.filter
+            }
         })
           .then(response => {
-            this.contents = this.contents.concat(response.data.list);
-            console.log("Success load content list");
+            resolve(response.data.list);
           })
           .catch(() => {
             console.log("Failed load content list");
           });
       });
     },
+
+    //component event handlers
     updateFilter(list){
+      this.toggleModal();
       this.pageParams.filter = list;
-      this.closeModal();
+      this.getContents().then(_contents => {
+        this.contents = _contents;
+      });
     },
-    closeModal(){
-      this.showModal = false;
+    updateOrder(value){
+      this.pageParams.order = value;
+      this.getContents().then(_contents => {
+        this.contents = _contents;
+      });
+    },
+
+    //util methods
+    toggleModal(){
+      if(this.showModal)
+        this.showModal = false;
+      else 
+        this.showModal = true;
+    },
+    transCateNoToName(cno){
+      let ret;
+      this.cateList.forEach(category => {
+        if(category.no === cno)
+          ret = category.name;
+      });
+      return ret;
     }
   }
 };

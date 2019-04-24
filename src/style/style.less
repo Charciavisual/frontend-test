@@ -1,13 +1,84 @@
-@color-red :rgb(248, 82, 82);
+@border-color-basic : #ccc;
+@font-size-basic : 15px;
+
+html,
+body {
+  background-color: #f8f8f8;
+  font-size: @font-size-basic;
+}
 
 #app {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+
+  .app-header {
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    .btn-modal-filter {
+      float: left;
+    }
+    .selector-order {
+      float: right;
+
+      button.selected {
+        color: blue;
+      }
+    }
+  }
+
+  .app-body {
+    .contents {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li + li {
+        margin-top: 10px;
+      }
+
+      .content-wrapper {
+        border: 1px solid @border-color-basic;
+        background-color: #fff;
+      }
+
+      .content-header {
+        padding: 10px 20px;
+        border-bottom: 1px solid @border-color-basic;
+        overflow: hidden;
+        .content-category {
+          float: left;
+        }
+        .content-no {
+          float: right;
+        }
+      }
+      .content-body {
+        padding: 10px 20px;
+
+        h3 {
+          margin-top: 1rem;
+          font-size: 1.5rem;
+        }
+        h3,
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 }
 
 button {
+  margin: 0;
+  padding: 5px 8px;
+  border: none;
+  box-shadow: none;
+
   cursor: pointer;
   &:focus {
     outline: 0; //remove blue outline
@@ -20,25 +91,18 @@ button {
   &.btn-white:hover {
     background-color: rgb(240, 238, 238);
   }
+  &.btn-positive {
+    background-color: #6da2d9;
+    color: #fff;
+  }
+  &.btn-positive:hover {
+    background-color: #5985b2;
+    color: #fff;
+  }
   &.btn-text {
     border: none;
     box-shadow: none;
     background-color: transparent;
-  }
-}
-
-.app-header {
-  overflow: hidden;
-}
-
-.btn-modal-filter {
-  float: left;
-}
-.selector-order {
-  float: right;
-
-  button.selected {
-    color: @color-red;
   }
 }
 
@@ -50,13 +114,7 @@ button {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  transition: opacity 0.3s ease;
-}
-
-.modal-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  transition: opacity 0.1s ease;
 }
 
 .modal-container {
@@ -70,16 +128,19 @@ button {
   background-color: #fff;
   border-radius: 0.25rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-}
+  transition: all 0.1s ease;
 
-.modal-body {
-  .item-filter + .item-filter {
-    margin-left: 5px;
+  .modal-body {
+    .item-filter + .item-filter {
+      margin-left: 5px;
+    }
   }
-}
 
-/*
+  .modal-footer {
+    text-align: right;
+  }
+
+  /*
  * The following styles are auto-applied to elements with
  * transition="modal" when their visibility is toggled
  * by Vue.js.
@@ -88,10 +149,28 @@ button {
  * these styles.
  */
 
-.modal-enter {
-  opacity: 0;
+  .modal-enter {
+    opacity: 0;
+  }
+
+  .modal-leave-active {
+    opacity: 0;
+  }
 }
 
-.modal-leave-active {
-  opacity: 0;
+.bar {
+  width: 1px;
+  margin: 0.5rem;
+
+  &:before {
+    content: "\007C";
+  }
+}
+
+.ellipsis-2l {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
