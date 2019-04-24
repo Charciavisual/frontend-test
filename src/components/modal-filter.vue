@@ -22,7 +22,15 @@
 
 <script>
 export default {
-  props: ["category", "selected"],
+  props: ["category", "filter"],
+  data() {
+    return {
+      selected: []
+    };
+  },
+  created() {
+    this.selected = this.filter;
+  },
   methods: {
     closeModal() {
       this.$emit("close");
