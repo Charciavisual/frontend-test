@@ -6,17 +6,9 @@
 </template>
 <script>
 export default {
-  data(){
-    return {
-      selected: ""
-    }
-  },
-  created(){
-    this.selected = "asc";
-  },
+  props:["selected"],
   methods: {
     updateOrder(order) {
-      this.selected = order;
       this.$emit("updateOrder", order);
     }
   }

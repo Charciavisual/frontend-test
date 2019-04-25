@@ -3,15 +3,13 @@
   <div class="contentlist">
     <div class="contentlist-header">
       <button class="btn-white btn-modal-filter" @click="toggleModal()">필터</button>
-      <selector-order @updateOrder="value=>{updateOrder(value)}"></selector-order>
+      <selector-order :selected="pageParams.order" @updateOrder="value=>{updateOrder(value)}"></selector-order>
       <modal-filter v-if="showModal" :category="cateList" :filter="pageParams.filter" @close="toggleModal()" @updateFilter="value=>{updateFilter(value)}"></modal-filter>
     </div>
      <div class="contentlist-body">
         <ul class="contents">
-          <li v-for="(item,index) in contents" :key="'contents_'+item.no">
-            <router-link :to="'/detail/'+item.no">
-                <content-main :category="transCateNoToName(item.category_no)" :content="item"></content-main>
-            </router-link>
+          <li v-for="(item,index) in contents" :key="'contents_'+item.no" :data-no="item.no" @click="goDetailPage(item.no)">
+            <content-main :category="transCateNoToName(item.category_no)" :content="item"></content-main>  
             <content-ad v-if="isAdContent(index)" :ad="curAdContent(index)"></content-ad>
           </li>
         </ul>
@@ -54,20 +52,22 @@ export default {
   mounted() {
     this.scrollCheck();
   },
-  computed: {
-    
-  },
   methods: {
 
     //init methods
      initApplication() {
       this.getCategories()
         .then(categories => {
-          let _filter = []
-          categories.forEach(category => {
-            _filter.push(category.no);
-          });
-          this.pageParams.filter= _filter;
+          
+          if(localStorage.lastFilter) //localStorage에 마지막으로 사용한 필터값이 저장되어 있는지 검사
+            this.pageParams.filter = JSON.parse(localStorage.lastFilter);
+          else {
+            let _filter = []
+            categories.forEach(category => {
+              _filter.push(category.no);
+            });
+            this.pageParams.filter= _filter;
+          }
         })
         .then(() => {
            this.getAds().then(_ads => {
@@ -75,9 +75,12 @@ export default {
            });
         })
         .then(() => {
-          this.getContents().then(_contents => {
-            this.contents = _contents;
-          });
+            if(localStorage.lastOrder) //localStorage에 마지막으로 사용한 정렬값이 저장되어 있는지 검사
+              this.pageParams.order = localStorage.lastOrder;
+
+            this.getContents().then(_contents => {
+              this.contents = _contents;
+            });
         });
     },
     initPageParams(){
@@ -152,15 +155,19 @@ export default {
     //component event handlers
     updateFilter(list){
       this.toggleModal();
+      if(this.pageParams.filter === list) return;
       this.initPageParams();
       this.pageParams.filter = list;
+      localStorage.lastFilter = JSON.stringify(list);
       this.getContents().then(_contents => {
         this.contents = _contents;
       });
     },
     updateOrder(value){
+      if(this.pageParams.order === value) return;
       this.initPageParams();
       this.pageParams.order = value;
+      localStorage.lastOrder = value;
       this.getContents().then(_contents => {
         this.contents = _contents;
       });
@@ -225,9 +232,8 @@ export default {
       let _idx = parseInt(curContentIdx / this.adsParams.perContent) % this.ads.length;
       return this.ads[_idx];
     },
-
-    routeDetailPage(req_no){
-      this.$router.push('/detail/'+req_no);
+    goDetailPage(articleNo){
+      this.$router.push('/detail/'+articleNo);
     }
   }
 };

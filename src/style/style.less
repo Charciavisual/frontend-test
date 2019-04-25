@@ -61,12 +61,10 @@ p {
       .content-header {
         padding: 10px 20px;
         border-bottom: 1px solid @border-color-basic;
-        overflow: hidden;
-        .content-category {
-          float: left;
-        }
+
         .content-no {
           float: right;
+          font-size: 0.9rem;
         }
       }
       .content-body {
@@ -76,12 +74,16 @@ p {
           margin-top: 1.4rem;
           font-size: 1.2rem;
           font-weight: 700;
-        }
-        h3,
-        p {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+        p {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 2;
         }
       }
     }
@@ -211,7 +213,6 @@ button {
     h3,
     p {
       display: -webkit-box;
-      width: 100%;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;

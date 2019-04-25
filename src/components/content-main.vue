@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="content-header">
         <span class="content-category">{{category}}</span>
-        <span class="content-no">{{content.no}}</span>
+        <span class="content-no">글번호-{{content.no}}</span>
     </div>
     <div class="content-body">
         <span class="content-email">{{content.email}}</span>
