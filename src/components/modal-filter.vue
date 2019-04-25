@@ -36,6 +36,11 @@ export default {
       this.$emit("close");
     },
     updateFilter() {
+      if(this.selected.length == 0) {
+        alert("하나 이상의 카테고리를 선택해주세요.");
+        return;
+      }
+
       this.$emit("updateFilter", this.selected);
     }
   }
