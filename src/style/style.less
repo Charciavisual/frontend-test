@@ -1,5 +1,6 @@
 @border-color-basic : #ccc;
 @font-size-basic : 15px;
+@max-width : 800px;
 
 html,
 body {
@@ -12,13 +13,13 @@ p {
   margin: 0;
 }
 
-#app {
+.contentlist {
   width: 100%;
-  max-width: 800px;
+  max-width: @max-width;
   margin: 0 auto;
   padding: 20px;
 
-  .app-header {
+  .contentlist-header {
     overflow: hidden;
     margin-bottom: 10px;
 
@@ -34,11 +35,19 @@ p {
     }
   }
 
-  .app-body {
+  .contentlist-body {
     .contents {
       list-style: none;
       margin: 0;
       padding: 0;
+
+      li a {
+        color: inherit;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
 
       li + li {
         margin-top: 10px;
@@ -237,6 +246,59 @@ button {
       p {
         -webkit-line-clamp: 2;
       }
+    }
+  }
+}
+
+.detail-wrapper {
+  width: 100%;
+  max-width: @max-width;
+  margin: 0 auto;
+  padding: 20px;
+}
+.detail-footer {
+  margin-top: 10px;
+}
+
+.article-wrapper {
+  padding: 20px;
+  border: 1px solid @border-color-basic;
+  background-color: #fff;
+}
+.article-header {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid @border-color-basic;
+}
+
+.replies {
+  margin-top: 1rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li + li {
+    margin-top: 10px;
+  }
+
+  .replies-label {
+    font-size: 1.2rem;
+  }
+  .reply-wrapper {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid @border-color-basic;
+  }
+  .reply-header {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid @border-color-basic;
+    .reply-email {
+      font-weight: 600;
+    }
+    .reply-regdate {
+      float: right;
     }
   }
 }
