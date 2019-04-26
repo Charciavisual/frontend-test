@@ -10,14 +10,14 @@
   </div>
 </template>
 <script>
-  export default {
-    created() {
-      if(!document.querySelector('meta[name="viewport"]')){
-        let meta = document.createElement('meta');
-        meta.name="viewport";
-        meta.content="width=device-width, initial-scale=1, maximum-scale=1";
-        document.querySelector('head').appendChild(meta);
-      }
+export default {
+  created() {
+    if (!document.querySelector('meta[name="viewport"]')) {
+      let meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1, maximum-scale=1";
+      document.querySelector("head").appendChild(meta);
     }
   }
+};
 </script>

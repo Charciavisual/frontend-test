@@ -3,9 +3,13 @@ import App from "./App.vue";
 import ListPage from "./ListPage.vue";
 import DetailPage from "./DetailPage.vue";
 import VueRouter from "vue-router";
-require("bootstrap/dist/css/bootstrap.min.css");
-require("./style/style.less");
+import BootstrapVue from "bootstrap-vue";
 
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "./assets/style/style.less";
+
+Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,7 +29,6 @@ const router = new VueRouter({
 });
 
 new Vue({
-  el: "#app",
   router,
   render: h => h(App)
 }).$mount("#app");

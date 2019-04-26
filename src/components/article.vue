@@ -4,7 +4,7 @@
         <h2>{{article.title}}</h2>
         <div>
             <span class="sp_email">{{article.email}}</span>
-            <span class="bar"></span>
+            <span class="bar pc-only"></span>
             <span class="sp_regdate">{{article.updated_at}}</span>
         </div>
     </div>

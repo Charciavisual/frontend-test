@@ -23,7 +23,7 @@ p {
 }
 button {
   margin: 0;
-  padding: 5px 8px;
+  padding: 0.3rem 0.5rem;
   border: none;
   box-shadow: none;
 
@@ -56,6 +56,7 @@ button {
 
 #app {
   .app-header {
+    text-align: center;
     background-color: @color-navy;
     color: #fff;
 
@@ -69,7 +70,7 @@ button {
     h1 {
       margin: 0;
       line-height: 50px;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       vertical-align: middle;
     }
   }
@@ -90,6 +91,18 @@ button {
       content: "\007C";
     }
   }
+
+  .flex-container {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+  }
+
+  @media (max-width: 480px) {
+    .pc-only {
+      display: none;
+    }
+  }
 }
 
 //list page style
@@ -102,16 +115,12 @@ button {
   .contentlist-header {
     margin-bottom: 10px;
 
-    .selector-order {
-      float: right;
-      font-size: 0.9rem;
-
-      button.selected {
-        color: blue;
-      }
-    }
     .search {
-      margin-top: 10px;
+      -webkit-flex: 1 1 auto;
+      -moz-flex: 1 1 auto;
+      flex: 1 1 auto;
+      max-width: 200px;
+      margin-left: auto;
       padding: 0.3rem 0.5rem;
       border: 1px solid @border-color-basic;
       background-color: #fff;
@@ -120,9 +129,25 @@ button {
         width: 100%;
       }
     }
+
+    .dp-filters {
+      width: 100%;
+      margin-top: 10px;
+      padding: 0 0.5rem;
+      font-weight: 600;
+      border-left: 2px solid @color-navy;
+    }
   }
 
   .contentlist-body {
+    .selector-order {
+      text-align: right;
+      font-size: 0.9rem;
+
+      button.selected {
+        color: blue;
+      }
+    }
     .contents {
       list-style: none;
       margin: 0;
@@ -147,12 +172,17 @@ button {
         background-color: #fff;
       }
       .none-contents-wrapper {
-        margin-top: 2rem;
+        width: 100%;
+        height: 200px;
+        line-height: 200px;
+        margin-top: 10px;
         text-align: center;
+        vertical-align: middle;
+        border: 1px solid @border-color-basic;
       }
 
       .content-header {
-        padding: 10px 20px;
+        padding: 10px 1rem;
         border-bottom: 1px solid @border-color-basic;
 
         .content-no {
@@ -161,7 +191,7 @@ button {
         }
       }
       .content-body {
-        padding: 20px;
+        padding: 20px 1rem;
 
         h3 {
           margin-top: 1.4rem;
@@ -177,6 +207,14 @@ button {
           overflow: hidden;
           text-overflow: ellipsis;
           -webkit-line-clamp: 2;
+        }
+
+        @media (max-width: 480px) {
+          .sp_email,
+          .sp_regdate {
+            float: none;
+            display: block;
+          }
         }
       }
     }
@@ -239,7 +277,7 @@ button {
 //ad style
 .ad-wrapper {
   margin-top: 10px;
-  padding: 20px;
+  padding: 20px 1rem;
   border: 1px solid @border-color-basic;
   background-color: #fff;
 }
@@ -249,9 +287,13 @@ button {
   font-weight: 600;
 }
 .ad-body {
+  display: -webkit-flex;
+  display: -moz-flex;
   display: flex;
 
   .ad-image-wrapper {
+    -webkit-flex: 0 0 220px;
+    -moz-flex: 0 0 220px;
     flex: 0 0 220px;
 
     img {
@@ -260,6 +302,8 @@ button {
     }
   }
   .ad-content-wrapper {
+    -webkit-flex: 1 1 auto;
+    -moz-flex: 1 1 auto;
     flex: 1 1 auto;
     margin-left: 1rem;
 
@@ -285,6 +329,8 @@ button {
 
     .ad-image-wrapper,
     .ad-content-wrapper {
+      -webkit-flex: 0;
+      -moz-flex: 0;
       flex: 0;
       width: 100%;
     }
@@ -324,6 +370,17 @@ button {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid @border-color-basic;
+
+  @media (max-width: 480px) {
+    .sp_email,
+    .sp_regdate {
+      float: none;
+      display: block;
+    }
+    .sp_regdate {
+      margin-top: 0.3rem;
+    }
+  }
 }
 
 // reply style
@@ -339,7 +396,21 @@ button {
   }
 
   .replies-label {
+    position: relative;
     font-size: 1rem;
+    margin-left: 12px;
+
+    &:before {
+      position: absolute;
+      top: 5px;
+      left: -10px;
+      width: 7px;
+      height: 7px;
+      content: "";
+      background: transparent;
+      border-left: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
   }
   .reply-wrapper {
     padding: 20px;
@@ -348,12 +419,23 @@ button {
   }
   .reply-header {
     margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid @border-color-basic;
     line-height: 1.1rem;
 
     .reply-regdate {
       float: right;
+    }
+
+    @media (max-width: 480px) {
+      .reply-email,
+      .reply-regdate {
+        float: none;
+        display: block;
+      }
+      .reply-regdate {
+        margin-top: 0.7rem;
+      }
     }
   }
 }

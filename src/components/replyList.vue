@@ -1,6 +1,6 @@
 <template>
     <div class="replies" v-if="replies.length > 0">
-        <h3 class="replies-label">댓글 - {{replies.length}}</h3>
+        <h3 class="replies-label">댓글 {{replies.length}}</h3>
         <ul>
             <li v-for="item in replies" :key="'reply_'+item.no">
                 <div class="reply-wrapper">

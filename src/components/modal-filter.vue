@@ -13,7 +13,7 @@
           </span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn-positive" @click="updateFilter()">저장</button>
+          <button type="button" class="btn-positive" @click="saveFilter()">저장</button>
         </div>
       </div>
     </div>
@@ -35,8 +35,8 @@ export default {
     closeModal() {
       this.$emit("close");
     },
-    updateFilter() {
-      if(this.selected.length == 0) {
+    saveFilter() {
+      if (this.selected.length == 0) {
         alert("하나 이상의 카테고리를 선택해주세요.");
         return;
       }

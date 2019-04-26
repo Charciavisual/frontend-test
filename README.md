@@ -1,18 +1,69 @@
-# frontend-test
+# 프론트엔드 1차 과제
 
 > Frontend test project
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+## 지원자 정보
 
-# build for production with minification
-npm run build
+- 이름 : 최창희
+- 연락처 : 010-5663-9458
+- 이메일 : sf9101@naver.com
+
+
+
+## 구현목록
+
+**1. 리스트 불러오기 (infinite-loading)**
+
+- 처음에 10개만 불러오기
+- 스크롤이 최하단에 닿을 때마다 리스트에 10개씩 추가
+
+**2. 정렬 (오름차순, 내림차순)**
+
+- 선택한 정렬순으로 리스트 불러오기
+
+**3. 필터 (modal)**
+
+- 별도 컴포넌트로 분리하여 개발
+- input type="checkbox"
+- 기본값: 모두 선택
+
+**4. 광고 삽입**
+
+- 4번째 index마다 광고 1개 삽입
+
+**5. 디테일 페이지**
+
+
+
+**+) 추가적으로 구현한 부분은 아래의 목록입니다.**
+
+- 마지막 정렬값, 필터값 저장
+
+- 검색 기능
+- 선택한 필터 보여주기
+- 디테일 페이지에서 리스트 페이지로 돌아왔을 때 기존에 불러왔던 리스트 유지
+
+
+
+## 지원 브라우저
+
+개발 전 목표했던 지원 브라우저 버전은 Vue.js와 Flexbox를 원활하게 지원할 수 있는 버전에 맞추었습니다.
+
+```
+IE :  >= 11
+Edge : >= 12
+Chrome : >= 21
+Safari : >= 6.1
+Opera : >= 12.1
+Firefox : >= 28
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## 추가사항
+
+이번 과제를 진행하며 별도의 서버가 없는 환경에서 Vue 컴포넌트간의 페이지 이동을 구현하기 위해 vue-router를 처음으로 사용 해보게 되었는데 router를 이용한 SPA 배포를 위한 설정이나 기타사항들을 아직 정확하게 이해하지 못해서  `npm run dev` 모드에서만 테스트를 진행할 수 있었습니다.  
+
+이러한 이유로 배포 후 서버상에서 실행 했을 때와 크로스 브라우징 테스트를 제대로 해보지 못했습니다.

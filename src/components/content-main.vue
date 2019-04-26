@@ -6,7 +6,7 @@
     </div>
     <div class="content-body">
         <span class="content-email sp_email">{{content.email}}</span>
-         <span class="bar"></span>
+         <span class="bar pc-only"></span>
         <span class="content-regdate sp_regdate">{{content.updated_at}}</span>
         <h3 class="content-title">{{content.title}}</h3>
         <p class="content-text" v-html="content.contents"></p>
