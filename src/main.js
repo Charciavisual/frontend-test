@@ -3,6 +3,7 @@ import App from "./App.vue";
 import ListPage from "./ListPage.vue";
 import DetailPage from "./DetailPage.vue";
 import VueRouter from "vue-router";
+require("bootstrap/dist/css/bootstrap.min.css");
 require("./style/style.less");
 
 Vue.use(VueRouter);

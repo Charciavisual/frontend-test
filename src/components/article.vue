@@ -3,9 +3,9 @@
     <div class="article-header">
         <h2>{{article.title}}</h2>
         <div>
-            <span>{{article.email}}</span>
+            <span class="sp_email">{{article.email}}</span>
             <span class="bar"></span>
-            <span>{{article.updated_at}}</span>
+            <span class="sp_regdate">{{article.updated_at}}</span>
         </div>
     </div>
     <div class="article-body" v-html="article.contents"></div>

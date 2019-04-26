@@ -1,10 +1,11 @@
 <template>
 <div class="detail-wrapper">
     <article-detail :article="article"></article-detail>
-    <reply-list :replies="replies"></reply-list>
-    <div class="detail-footer">
+     <div class="detail-footer">
         <button class="btn-white" @click="goListPage()">목록으로</button>
     </div>
+    <reply-list :replies="replies"></reply-list>
+   
 </div>
 </template>
 <script>

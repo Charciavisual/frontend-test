@@ -1,18 +1,98 @@
 @border-color-basic : #ccc;
+@color-navy : #003253;
 @font-size-basic : 15px;
 @max-width : 800px;
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
+  margin: 0;
+  padding: 0;
   background-color: #f8f8f8;
   font-size: @font-size-basic;
   word-break: break-all;
 }
-
+input {
+  border: none;
+}
 p {
   margin: 0;
 }
+button {
+  margin: 0;
+  padding: 5px 8px;
+  border: none;
+  box-shadow: none;
 
+  cursor: pointer;
+  &:focus {
+    outline: 0; //remove blue outline
+  }
+  &.btn-white {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+  }
+  &.btn-white:hover {
+    background-color: rgb(240, 238, 238);
+  }
+  &.btn-positive {
+    background-color: #6da2d9;
+    color: #fff;
+  }
+  &.btn-positive:hover {
+    background-color: #5985b2;
+    color: #fff;
+  }
+  &.btn-text {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+#app {
+  .app-header {
+    background-color: @color-navy;
+    color: #fff;
+
+    .header-wrapper {
+      width: 100%;
+      max-width: @max-width;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 50px;
+    }
+    h1 {
+      margin: 0;
+      line-height: 50px;
+      font-size: 1.5rem;
+      vertical-align: middle;
+    }
+  }
+  .sp_email {
+    font-weight: 600;
+  }
+
+  .sp_regdate {
+    font-size: 0.9rem;
+    color: #767676;
+  }
+
+  .bar {
+    width: 1px;
+    margin: 0.5rem;
+
+    &:before {
+      content: "\007C";
+    }
+  }
+}
+
+//list page style
 .contentlist {
   width: 100%;
   max-width: @max-width;
@@ -20,17 +100,24 @@ p {
   padding: 20px;
 
   .contentlist-header {
-    overflow: hidden;
     margin-bottom: 10px;
 
-    .btn-modal-filter {
-      float: left;
-    }
     .selector-order {
       float: right;
+      font-size: 0.9rem;
 
       button.selected {
         color: blue;
+      }
+    }
+    .search {
+      margin-top: 10px;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid @border-color-basic;
+      background-color: #fff;
+
+      input {
+        width: 100%;
       }
     }
   }
@@ -41,11 +128,13 @@ p {
       margin: 0;
       padding: 0;
 
-      li a {
-        color: inherit;
+      li {
+        a {
+          color: inherit;
 
-        &:hover {
-          text-decoration: none;
+          &:hover {
+            text-decoration: none;
+          }
         }
       }
 
@@ -56,6 +145,10 @@ p {
       .content-wrapper {
         border: 1px solid @border-color-basic;
         background-color: #fff;
+      }
+      .none-contents-wrapper {
+        margin-top: 2rem;
+        text-align: center;
       }
 
       .content-header {
@@ -90,39 +183,7 @@ p {
   }
 }
 
-button {
-  margin: 0;
-  padding: 5px 8px;
-  border: none;
-  box-shadow: none;
-
-  cursor: pointer;
-  &:focus {
-    outline: 0; //remove blue outline
-  }
-  &.btn-white {
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #000;
-  }
-  &.btn-white:hover {
-    background-color: rgb(240, 238, 238);
-  }
-  &.btn-positive {
-    background-color: #6da2d9;
-    color: #fff;
-  }
-  &.btn-positive:hover {
-    background-color: #5985b2;
-    color: #fff;
-  }
-  &.btn-text {
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-  }
-}
-
+//modal style
 .modal-mask {
   position: fixed;
   z-index: 1050;
@@ -175,15 +236,7 @@ button {
   }
 }
 
-.bar {
-  width: 1px;
-  margin: 0.5rem;
-
-  &:before {
-    content: "\007C";
-  }
-}
-
+//ad style
 .ad-wrapper {
   margin-top: 10px;
   padding: 20px;
@@ -251,6 +304,7 @@ button {
   }
 }
 
+// detail page style
 .detail-wrapper {
   width: 100%;
   max-width: @max-width;
@@ -272,6 +326,7 @@ button {
   border-bottom: 1px solid @border-color-basic;
 }
 
+// reply style
 .replies {
   margin-top: 1rem;
 
@@ -284,7 +339,7 @@ button {
   }
 
   .replies-label {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .reply-wrapper {
     padding: 20px;
@@ -293,11 +348,10 @@ button {
   }
   .reply-header {
     margin-bottom: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px solid @border-color-basic;
-    .reply-email {
-      font-weight: 600;
-    }
+    line-height: 1.1rem;
+
     .reply-regdate {
       float: right;
     }
